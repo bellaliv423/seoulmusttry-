@@ -1,9 +1,9 @@
 # Seoul in a Bite - AI Collaboration Hub
 # AI 협업 허브 (Claude Code + 엔티)
 
-**Last Updated**: 2026-01-29 (Phase 3 진행 중)
+**Last Updated**: 2026-02-02 (Phase 3 진행 중 - 엔티 작업 대기)
 **Project**: Seoul in a Bite - Restaurant Discovery Platform for Foreigners in Seoul
-**Status**: Phase 2 Complete + Phase 3 진행 중 (Supabase 재생성, GitHub 연결 완료)
+**Status**: Phase 2 Complete + Phase 3 진행 중 (Claude Code 작업 완료, 엔티 작업 대기)
 **Source of Truth**: 이 파일이 유일한 프로젝트 협업 문서입니다.
 **GitHub**: https://github.com/bellaliv423/seoulmusttry-.git
 
@@ -186,20 +186,59 @@
 | Phase 2 | Migration + Meal Buddy (Claude Code) | DONE |
 | Phase 3 | Enhancements (Claude Code + 엔티) | IN PROGRESS |
 
-### Phase 3 진행 현황
+### Phase 3 진행 현황 (2026-02-02 Updated)
 
-| # | Task | Assignee | Status |
-|---|------|----------|--------|
-| 1 | Shared Navigation Component | Claude Code | DONE |
-| 2 | 폴더 정리 (Flutter 삭제, Manus 문서 삭제) | Claude Code | DONE |
-| 3 | Seed Script PostgreSQL + 데이터 확장 | Claude Code | DONE (이미 변환됨 확인) |
-| 4 | UI/UX 공통 컴포넌트 생성 | Claude Code | DONE |
-| 4-1 | MapPage ErrorState prop 버그 수정 | Claude Code | DONE |
-| 4-2 | 기존 페이지에 공통 컴포넌트 적용 | 엔티 | TODO |
-| 5 | 검색/필터 강화 | 엔티 | TODO |
-| 6 | **API 통합 데이터 수집 (KCISA + SerpAPI)** | **Claude Code** | **DONE** |
-| 7 | Admin Dashboard | 미정 | TODO |
-| 8 | Additional Tests | 미정 | TODO |
+| # | Task | Assignee | Status | Notes |
+|---|------|----------|--------|-------|
+| 1 | Shared Navigation Component | Claude Code | DONE | Navbar.tsx 생성, App.tsx에 적용 |
+| 2 | 폴더 정리 (Flutter 삭제, Manus 문서 삭제) | Claude Code | DONE | 7개 문서 + Flutter 폴더 삭제 |
+| 3 | Seed Script PostgreSQL + 데이터 확장 | Claude Code | DONE | 56개+ 레스토랑 데이터 포함 |
+| 4 | UI/UX 공통 컴포넌트 생성 | Claude Code | DONE | LoadingSpinner, ErrorState, EmptyState |
+| 4-1 | MapPage ErrorState prop 버그 수정 | Claude Code | DONE | message → description |
+| **4-2** | **기존 페이지에 공통 컴포넌트 적용** | **엔티** | **TODO** | **HIGH PRIORITY - 아래 상세 스펙 참조** |
+| **5** | **검색/필터 강화** | **엔티** | **TODO** | **가격 필터 + 검색 하이라이트** |
+| 6 | API 통합 데이터 수집 (KCISA + SerpAPI) | Claude Code | DONE | collect-restaurant-data.mjs |
+| 7 | Admin Dashboard | 미정 | TODO | Phase 4 이후 |
+| 8 | Additional Tests | 미정 | TODO | Phase 4 이후 |
+| 9 | Supabase 배포 설정 | USER | TODO | 사용자가 직접 진행 필요 |
+| 10 | Vercel 배포 설정 | USER | TODO | 사용자가 직접 진행 필요 |
+
+---
+
+## 다음 단계 로드맵 (2026-02-02)
+
+### 즉시 진행 필요 (엔티 담당)
+
+#### TODO 1: 기존 페이지에 공통 컴포넌트 적용 (HIGH PRIORITY)
+**예상 작업량**: 4개 파일 수정
+**목표**: 인라인 로딩/에러/빈 상태 코드를 재사용 가능한 컴포넌트로 교체
+
+#### TODO 2: 검색/필터 강화 (MEDIUM PRIORITY)
+**예상 작업량**: 4개 파일 수정
+**목표**: 가격대 필터 추가, 검색어 하이라이트
+
+### 사용자 진행 필요
+
+#### TODO 3: Supabase 프로젝트 생성
+1. supabase.com에서 새 프로젝트 생성
+2. Google OAuth + Kakao OAuth 설정
+3. `uploads` 스토리지 버킷 생성
+4. `pnpm db:push`로 스키마 적용
+
+#### TODO 4: Vercel 배포
+1. GitHub repo 연결
+2. 환경변수 설정 (`.env.example` 참조)
+3. 배포 및 테스트
+
+### 향후 계획 (Phase 4)
+
+| # | Task | Priority | Description |
+|---|------|----------|-------------|
+| 1 | Admin Dashboard | MEDIUM | 관리자용 맛집/사용자 관리 페이지 |
+| 2 | 리뷰 사진 업로드 | LOW | Supabase Storage 활용 |
+| 3 | 실시간 알림 | LOW | Meal Buddy 매칭 알림 |
+| 4 | 성능 최적화 | LOW | 이미지 최적화, 코드 스플리팅 |
+| 5 | E2E 테스트 | LOW | Playwright 또는 Cypress |
 
 ---
 
@@ -637,18 +676,6 @@ mealBuddy.sendMessage    -> POST send message (protected, creator or accepted)
 
 ---
 
-## Supabase Project (2026-01-29 생성)
-
-- Project Name: `seoulmusttry`
-- Project URL: `https://jdifujagzwealkdyfizg.supabase.co`
-- Region: Asia-Pacific
-- Anon Key: `sb_publishable_bvaakyG_xkbHVVS5UBxOPA_uCEMOUy9`
-- Service Role Key: (비공개 - 구글 시트에 저장됨)
-- Database URL: (비공개 - 구글 시트에 저장됨)
-- Auth Callback URL: `https://jdifujagzwealkdyfizg.supabase.co/auth/v1/callback`
-
----
-
 ## Kakao API Keys (provided by user)
 
 - App Name: `seoulmusttry`
@@ -695,10 +722,10 @@ mealBuddy.sendMessage    -> POST send message (protected, creator or accepted)
 ## Deployment Checklist
 
 ### Step 1: Supabase Setup (USER)
-- [x] Create Supabase project (2026-01-29 완료: seoulmusttry)
-- [x] Get URL, anon key, service role key, DB connection string (구글 시트에 저장)
-- [ ] Enable Google OAuth provider (TODO: Google Cloud Console 필요)
-- [ ] Enable Kakao OAuth provider (TODO: REST API Key 설정)
+- [ ] Create Supabase project
+- [ ] Get URL, anon key, service role key, DB connection string
+- [ ] Enable Google OAuth provider
+- [ ] Enable Kakao OAuth provider
 - [ ] Create `uploads` storage bucket (public)
 - [ ] Run `pnpm db:push` to apply schema
 
@@ -734,3 +761,49 @@ mealBuddy.sendMessage    -> POST send message (protected, creator or accepted)
 10. **Navbar is in App.tsx.** All pages share the same `<Navbar />`. Do NOT add per-page headers.
 11. **Navbar height is h-14 (56px).** Sticky elements should use `top-16` offset.
 12. **supabase/ folder is reference only.** The actual schema is managed by Drizzle ORM (`drizzle/schema.ts`).
+
+---
+
+## 투두 체크리스트 (Progress Tracking)
+
+### Phase 3 - 엔티 작업
+- [ ] **작업 #4-2**: 기존 페이지에 공통 컴포넌트 적용
+  - [ ] Home.tsx - LoadingSpinner, EmptyState 적용
+  - [ ] RestaurantDetail.tsx - LoadingSpinner, ErrorState 적용
+  - [ ] MealBuddyPage.tsx - LoadingSpinner, EmptyState 적용
+  - [ ] MealBuddyPostDetail.tsx - LoadingSpinner, ErrorState 적용
+- [ ] **작업 #5**: 검색/필터 강화
+  - [ ] Home.tsx - 가격 필터 UI 추가
+  - [ ] server/routers.ts - 가격 필터 endpoint
+  - [ ] 검색어 하이라이트 기능
+  - [ ] i18n.ts - 새 번역 키 추가
+
+### Phase 3 - 사용자 작업
+- [ ] Supabase 프로젝트 생성
+  - [ ] Google OAuth 설정
+  - [ ] Kakao OAuth 설정
+  - [ ] uploads 버킷 생성
+  - [ ] `pnpm db:push` 실행
+- [ ] Vercel 배포
+  - [ ] GitHub 연결
+  - [ ] 환경변수 설정
+  - [ ] 배포 확인
+
+### Phase 4 (향후)
+- [ ] Admin Dashboard
+- [ ] 리뷰 사진 업로드
+- [ ] 실시간 알림
+- [ ] 성능 최적화
+- [ ] E2E 테스트
+
+---
+
+## 변경 이력 (Changelog)
+
+| 날짜 | 담당자 | 변경 내용 |
+|------|--------|----------|
+| 2026-01-27 | Manus AI | Phase 1 완료 - Full-stack 기반 구축 |
+| 2026-01-27 | Claude Code | Phase 2 완료 - MySQL→PostgreSQL, Supabase 마이그레이션 |
+| 2026-01-27 | Claude Code | Navbar 컴포넌트 생성, 폴더 정리 |
+| 2026-01-28 | Claude Code | 공통 UI 컴포넌트 생성, API 통합 스크립트 작성 |
+| 2026-02-02 | Claude Code | AI_COLLABORATION.md 업데이트, 투두 체크리스트 추가, GitHub 연결 |
