@@ -1,9 +1,9 @@
 # Seoul in a Bite - CLAUDE.md
 
 **프로젝트**: Seoul in a Bite - 외국인을 위한 서울 맛집 플랫폼
-**마지막 업데이트**: 2026-01-29 (KST)
+**마지막 업데이트**: 2026-02-03 (KST)
 **패키지 매니저**: pnpm (npm/yarn 사용 금지)
-**프로젝트 루트**: `D:\AI _coding_project_all\seoul_in_a_bite_project_plan\seoul_in_a_bite_web_manus`
+**프로젝트 루트**: `D:\AI _coding_project_all\seoulmusttry\seoulmusttry_manus`
 **GitHub**: https://github.com/bellaliv423/seoulmusttry-.git
 
 ---
@@ -25,6 +25,11 @@
 3. **프로젝트 상태 정리**
    - Git: main 브랜치, clean 상태
    - GitHub: https://github.com/bellaliv423/seoulmusttry-.git
+
+4. **GitHub 커밋 완료**
+   - AI_COLLABORATION.md를 프로젝트 루트로 이동 (git 추적 가능하도록)
+   - 커밋: `f3b75aa` - docs: Update Phase 3 status to complete
+   - 푸시 완료: origin/main
 
 ### 결론: Phase 3 모든 작업 완료됨
 
@@ -160,7 +165,7 @@
 |-------|------|------|
 | Phase 1 | Full-stack 기반 (Manus AI) | DONE |
 | Phase 2 | 마이그레이션 + Meal Buddy (Claude Code) | DONE |
-| Phase 3 | 개선 작업 (Claude Code + 엔티) | IN PROGRESS |
+| Phase 3 | 개선 작업 (Claude Code) | DONE |
 
 ### Phase 3 상세
 
@@ -180,7 +185,39 @@
 
 ## AI 협업 정보
 
-- **메인 협업 문서**: `AI_COLLABORATION.md` (프로젝트 상위 폴더)
-- **협업 AI**: Manus AI (Phase 1), Claude Code (Phase 2-3), 엔티 (Phase 3)
+- **메인 협업 문서**: `AI_COLLABORATION.md` (프로젝트 루트, 2026-02-03 이동됨)
+- **협업 AI**: Manus AI (Phase 1), Claude Code (Phase 2-3)
 - **Source of Truth**: `AI_COLLABORATION.md`가 전체 프로젝트 스펙/아키텍처 문서
 - **이 파일(CLAUDE.md)**: 일일 작업 기록 + Claude Code 세션별 컨텍스트 용도
+
+---
+
+## 앱 실행 방법
+
+### 로컬 개발 서버 실행
+
+```bash
+cd "D:\AI _coding_project_all\seoulmusttry\seoulmusttry_manus"
+pnpm install
+pnpm dev
+```
+
+### 환경변수 설정 필요 (.env 파일 생성)
+
+구글 시트에 저장된 Supabase 키로 `.env` 파일 생성:
+
+```
+SUPABASE_URL=https://jdifujagzwealkdyfizg.supabase.co
+VITE_SUPABASE_URL=https://jdifujagzwealkdyfizg.supabase.co
+VITE_SUPABASE_ANON_KEY=(구글 시트에서 복사)
+SUPABASE_SERVICE_ROLE_KEY=(구글 시트에서 복사)
+DATABASE_URL=(구글 시트에서 복사)
+VITE_KAKAO_MAP_JS_KEY=1c716f8fc9de5cedc4e6041882078c71
+```
+
+### 다음 세션에서 진행할 작업
+
+1. `.env` 파일 설정 후 앱 실행 테스트
+2. Supabase OAuth 설정 (Google + Kakao)
+3. DB 스키마 적용 및 Seed 데이터 입력
+4. Vercel 배포
