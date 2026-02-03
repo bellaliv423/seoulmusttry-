@@ -184,19 +184,19 @@
 |-------|-------------|--------|
 | Phase 1 | Full-stack foundation (Manus AI) | DONE |
 | Phase 2 | Migration + Meal Buddy (Claude Code) | DONE |
-| Phase 3 | Enhancements (Claude Code + 엔티) | IN PROGRESS |
+| Phase 3 | Enhancements (Claude Code + 엔티) | DONE |
 
-### Phase 3 진행 현황 (2026-02-02 Updated)
+### Phase 3 진행 현황 (2026-02-03 Updated)
 
 | # | Task | Assignee | Status | Notes |
 |---|------|----------|--------|-------|
 | 1 | Shared Navigation Component | Claude Code | DONE | Navbar.tsx 생성, App.tsx에 적용 |
 | 2 | 폴더 정리 (Flutter 삭제, Manus 문서 삭제) | Claude Code | DONE | 7개 문서 + Flutter 폴더 삭제 |
 | 3 | Seed Script PostgreSQL + 데이터 확장 | Claude Code | DONE | 56개+ 레스토랑 데이터 포함 |
-| 4 | UI/UX 공통 컴포넌트 생성 | Claude Code | DONE | LoadingSpinner, ErrorState, EmptyState |
+| 4 | UI/UX 공통 컴포넌트 생성 | Claude Code | DONE | LoadingSpinner, ErrorState, EmptyState, HighlightedText |
 | 4-1 | MapPage ErrorState prop 버그 수정 | Claude Code | DONE | message → description |
-| **4-2** | **기존 페이지에 공통 컴포넌트 적용** | **엔티** | **TODO** | **HIGH PRIORITY - 아래 상세 스펙 참조** |
-| **5** | **검색/필터 강화** | **엔티** | **TODO** | **가격 필터 + 검색 하이라이트** |
+| 4-2 | 기존 페이지에 공통 컴포넌트 적용 | Claude Code | DONE | Home, RestaurantDetail, MealBuddy 등 모두 적용 |
+| 5 | 검색/필터 강화 | Claude Code | DONE | 가격 필터 + 검색 하이라이트 + i18n 완료 |
 | 6 | API 통합 데이터 수집 (KCISA + SerpAPI) | Claude Code | DONE | collect-restaurant-data.mjs |
 | 7 | Admin Dashboard | 미정 | TODO | Phase 4 이후 |
 | 8 | Additional Tests | 미정 | TODO | Phase 4 이후 |
@@ -205,27 +205,24 @@
 
 ---
 
-## 다음 단계 로드맵 (2026-02-02)
+## 다음 단계 로드맵 (2026-02-03 Updated)
 
-### 즉시 진행 필요 (엔티 담당)
+### Phase 3 완료됨
 
-#### TODO 1: 기존 페이지에 공통 컴포넌트 적용 (HIGH PRIORITY)
-**예상 작업량**: 4개 파일 수정
-**목표**: 인라인 로딩/에러/빈 상태 코드를 재사용 가능한 컴포넌트로 교체
+모든 UI/UX 개선 작업이 완료되었습니다:
+- 공통 컴포넌트 (LoadingSpinner, EmptyState, ErrorState, HighlightedText) 적용 완료
+- 가격 필터 + 검색어 하이라이트 구현 완료
+- i18n 번역 키 4개 언어 모두 추가 완료
 
-#### TODO 2: 검색/필터 강화 (MEDIUM PRIORITY)
-**예상 작업량**: 4개 파일 수정
-**목표**: 가격대 필터 추가, 검색어 하이라이트
+### 사용자 진행 필요 (배포 준비)
 
-### 사용자 진행 필요
-
-#### TODO 3: Supabase 프로젝트 생성
-1. supabase.com에서 새 프로젝트 생성
+#### TODO 1: Supabase 설정
+1. supabase.com에서 프로젝트 확인/생성
 2. Google OAuth + Kakao OAuth 설정
 3. `uploads` 스토리지 버킷 생성
 4. `pnpm db:push`로 스키마 적용
 
-#### TODO 4: Vercel 배포
+#### TODO 2: Vercel 배포
 1. GitHub repo 연결
 2. 환경변수 설정 (`.env.example` 참조)
 3. 배포 및 테스트
