@@ -1,9 +1,9 @@
 # Seoul in a Bite - AI Collaboration Hub
 # AI 협업 허브 (Claude Code + 엔티)
 
-**Last Updated**: 2026-02-02 (Phase 3 진행 중 - 엔티 작업 대기)
+**Last Updated**: 2026-02-04 (Phase 3 완료, Phase 4 기획 중)
 **Project**: Seoul in a Bite - Restaurant Discovery Platform for Foreigners in Seoul
-**Status**: Phase 2 Complete + Phase 3 진행 중 (Claude Code 작업 완료, 엔티 작업 대기)
+**Status**: Phase 3 Complete - 배포 준비 단계
 **Source of Truth**: 이 파일이 유일한 프로젝트 협업 문서입니다.
 **GitHub**: https://github.com/bellaliv423/seoulmusttry-.git
 
@@ -763,35 +763,69 @@ mealBuddy.sendMessage    -> POST send message (protected, creator or accepted)
 
 ## 투두 체크리스트 (Progress Tracking)
 
-### Phase 3 - 엔티 작업
-- [ ] **작업 #4-2**: 기존 페이지에 공통 컴포넌트 적용
-  - [ ] Home.tsx - LoadingSpinner, EmptyState 적용
-  - [ ] RestaurantDetail.tsx - LoadingSpinner, ErrorState 적용
-  - [ ] MealBuddyPage.tsx - LoadingSpinner, EmptyState 적용
-  - [ ] MealBuddyPostDetail.tsx - LoadingSpinner, ErrorState 적용
-- [ ] **작업 #5**: 검색/필터 강화
-  - [ ] Home.tsx - 가격 필터 UI 추가
-  - [ ] server/routers.ts - 가격 필터 endpoint
-  - [ ] 검색어 하이라이트 기능
-  - [ ] i18n.ts - 새 번역 키 추가
+### Phase 3 - 완료됨 ✅
+- [x] **작업 #4-2**: 기존 페이지에 공통 컴포넌트 적용
+  - [x] Home.tsx - LoadingSpinner, EmptyState 적용
+  - [x] RestaurantDetail.tsx - LoadingSpinner, ErrorState 적용
+  - [x] MealBuddyPage.tsx - LoadingSpinner, EmptyState 적용
+  - [x] MealBuddyPostDetail.tsx - LoadingSpinner, ErrorState 적용
+- [x] **작업 #5**: 검색/필터 강화
+  - [x] Home.tsx - 가격 필터 UI 추가
+  - [x] server/routers.ts - 가격 필터 endpoint
+  - [x] 검색어 하이라이트 기능
+  - [x] i18n.ts - 새 번역 키 추가
 
-### Phase 3 - 사용자 작업
-- [ ] Supabase 프로젝트 생성
-  - [ ] Google OAuth 설정
-  - [ ] Kakao OAuth 설정
-  - [ ] uploads 버킷 생성
-  - [ ] `pnpm db:push` 실행
-- [ ] Vercel 배포
-  - [ ] GitHub 연결
-  - [ ] 환경변수 설정
-  - [ ] 배포 확인
+### 배포 준비 - 사용자 진행 필요 🚀
+- [ ] **Supabase 프로젝트 설정**
+  - [ ] supabase.com에서 프로젝트 생성
+  - [ ] Google OAuth Provider 설정
+  - [ ] Kakao OAuth Provider 설정 (REST API Key 사용)
+  - [ ] `uploads` Storage 버킷 생성 (public)
+  - [ ] `pnpm db:push`로 스키마 적용
+  - [ ] `node seed-data.mjs`로 초기 데이터 삽입
+- [ ] **Vercel 배포**
+  - [ ] GitHub repo 연결 (bellaliv423/seoulmusttry-)
+  - [ ] 환경변수 설정 (`.env.example` 참조)
+  - [ ] 배포 및 테스트
+- [ ] **Kakao Developers 설정**
+  - [ ] 배포 도메인 등록
+  - [ ] Kakao Login redirect URI 설정
 
-### Phase 4 (향후)
-- [ ] Admin Dashboard
-- [ ] 리뷰 사진 업로드
-- [ ] 실시간 알림
-- [ ] 성능 최적화
-- [ ] E2E 테스트
+### Phase 4 - 다음 기획 📋
+
+#### 우선순위 HIGH
+| # | Task | 설명 | 담당 |
+|---|------|------|------|
+| 1 | Admin Dashboard | 맛집/사용자 관리 페이지 | Claude Code + 엔티 |
+| 2 | 실제 데이터 수집 | KCISA + SerpAPI로 실제 맛집 데이터 | Claude Code |
+| 3 | 이미지 최적화 | Supabase Storage 연동, 썸네일 생성 | Claude Code |
+
+#### 우선순위 MEDIUM
+| # | Task | 설명 | 담당 |
+|---|------|------|------|
+| 4 | 리뷰 사진 업로드 | 리뷰 작성 시 사진 첨부 기능 | 엔티 |
+| 5 | 푸시 알림 | Meal Buddy 매칭 알림 | Claude Code |
+| 6 | 즐겨찾기 폴더 | 북마크 그룹화 기능 | 엔티 |
+
+#### 우선순위 LOW
+| # | Task | 설명 | 담당 |
+|---|------|------|------|
+| 7 | E2E 테스트 | Playwright/Cypress 테스트 | Claude Code |
+| 8 | PWA 지원 | 오프라인 모드, 홈 화면 추가 | Claude Code |
+| 9 | 다크 모드 | ThemeContext 활용 | 엔티 |
+
+### 엔티 협업 작업 목록 🤝
+
+#### 즉시 진행 가능 (배포 전)
+1. **코드 리뷰**: 기존 컴포넌트 구조 파악
+2. **UI 다듬기**: 세부 스타일 조정 (간격, 색상 등)
+3. **번역 검수**: i18n.ts 다국어 번역 품질 확인
+
+#### 배포 후 진행
+1. **리뷰 사진 업로드 기능** (Supabase Storage 활용)
+2. **즐겨찾기 폴더 기능** (bookmarks 테이블 확장)
+3. **다크 모드 구현** (ThemeContext 활용)
+4. **Admin Dashboard UI** (관리자 페이지 프론트엔드)
 
 ---
 
@@ -804,3 +838,4 @@ mealBuddy.sendMessage    -> POST send message (protected, creator or accepted)
 | 2026-01-27 | Claude Code | Navbar 컴포넌트 생성, 폴더 정리 |
 | 2026-01-28 | Claude Code | 공통 UI 컴포넌트 생성, API 통합 스크립트 작성 |
 | 2026-02-02 | Claude Code | AI_COLLABORATION.md 업데이트, 투두 체크리스트 추가, GitHub 연결 |
+| 2026-02-04 | Claude Code | Phase 3 완료 확인, Phase 4 기획 추가, 엔티 협업 작업 목록 상세화 |
