@@ -7,6 +7,15 @@ import superjson from "superjson";
 import App from "./App";
 import "./index.css";
 
+// Kakao Maps API 동적 로드
+const KAKAO_MAP_API_KEY = import.meta.env.VITE_KAKAO_MAP_API_KEY || import.meta.env.VITE_KAKAO_MAP_JS_KEY;
+if (KAKAO_MAP_API_KEY) {
+  const script = document.createElement("script");
+  script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_MAP_API_KEY}&libraries=services,clusterer,drawing&autoload=false`;
+  script.async = true;
+  document.head.appendChild(script);
+}
+
 const queryClient = new QueryClient();
 
 const trpcClient = trpc.createClient({

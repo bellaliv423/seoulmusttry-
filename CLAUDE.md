@@ -1,14 +1,102 @@
 # Seoul in a Bite - CLAUDE.md
 
 **프로젝트**: Seoul in a Bite - 외국인을 위한 서울 맛집 플랫폼
-**마지막 업데이트**: 2026-02-03 (KST)
+**마지막 업데이트**: 2026-02-05 (KST)
 **패키지 매니저**: pnpm (npm/yarn 사용 금지)
 **프로젝트 루트**: `D:\AI _coding_project_all\seoulmusttry\seoulmusttry_manus`
+**Flutter 프로젝트**: `D:\AI _coding_project_all\seoulmusttry\seoul_in_a_bite_flutter`
 **GitHub**: https://github.com/bellaliv423/seoulmusttry-.git
 
 ---
 
-## 오늘 작업 내역 (2026-02-03)
+## 오늘 작업 내역 (2026-02-05)
+
+### 완료된 작업
+
+#### 1. Google Stitch 디자인 적용
+- Google Stitch에서 UI 디자인 생성 및 다운로드
+- 디자인 파일 저장: `D:\AI _coding_project_all\seoulmusttry\design\stitch\`
+- 총 14개 화면 디자인 완료:
+  - seoul_in_a_bite_home, restaurant_details, restaurant_map_view
+  - meal_buddy_community, create_meal_buddy_post, join_meal_buddy_post
+  - my_meal_buddy_post_details, meal_buddy_group_chat, post_success_confirmation
+  - review_your_buddy, user_profile_&_favorites, write_restaurant_review
+
+#### 2. 웹앱 디자인 시스템 업데이트
+- **컬러 테마 변경**: 파란색 → 오렌지+화이트
+  - Primary: Sunset Orange (#FF6B35)
+  - Secondary: Tangerine (#FF8C42)
+  - Background: Pure White (#FFFFFF), Cream White (#FFF8F0)
+- **폰트 추가**: Poppins (제목), Inter (본문), Noto Sans (다국어)
+- **index.css** 업데이트: oklch 컬러 시스템으로 라이트/다크 모드 지원
+
+#### 3. 웹앱 환경변수 문제 해결
+- `VITE_KAKAO_MAP_API_KEY` 추가 (.env)
+- `VITE_ANALYTICS_ENDPOINT`, `VITE_ANALYTICS_WEBSITE_ID` 추가
+- `index.html`에서 Analytics 스크립트 제거 (선택적 기능)
+- Kakao Maps API를 `main.tsx`에서 동적 로드하도록 변경
+- `cross-env` 패키지 추가 (Windows NODE_ENV 호환)
+
+#### 4. 웹앱 홈 화면 UI 리디자인
+- Google Stitch 디자인 기반으로 `Home.tsx` 전면 업데이트
+- 가로 스크롤 카테고리 칩
+- Featured 배너 섹션 추가
+- 2열 맛집 그리드 (정사각형 이미지 + 하트 버튼)
+- 가격 필터 ($, $$, $$$)
+
+#### 5. Flutter 앱 프로젝트 생성 (신규)
+- **프로젝트 위치**: `D:\AI _coding_project_all\seoulmusttry\seoul_in_a_bite_flutter`
+- **패키지 설정** (pubspec.yaml):
+  - flutter_riverpod (상태 관리)
+  - go_router (라우팅)
+  - dio (HTTP)
+  - cached_network_image, google_fonts, shimmer
+  - google_maps_flutter, geolocator
+- **디자인 시스템**:
+  - `lib/core/theme/app_colors.dart` - 오렌지 컬러 팔레트
+  - `lib/core/theme/app_theme.dart` - Material 3 테마
+- **라우터**: `lib/core/router/app_router.dart` (GoRouter + ShellRoute)
+- **화면 구현**:
+  - `home_screen.dart` - 홈 화면 (검색, 카테고리, 배너, 맛집 그리드)
+  - `restaurant_detail_screen.dart` - 맛집 상세 (메뉴, 리뷰 탭)
+  - `meal_buddy_screen.dart` - 밥친구 목록
+  - `profile_screen.dart` - 프로필 (통계, 저장 목록)
+  - `main_scaffold.dart` - 하단 네비게이션 바
+
+#### 6. 종합 기획안 작성
+- **파일**: `D:\AI _coding_project_all\seoulmusttry\Seoul_in_a_Bite_종합_기획안.md`
+- 브랜드 아이덴티티, 컬러 팔레트, 기술 스택
+- Google Stitch 디자인 요청 프롬프트 (한국어/영어)
+- 웹 + Flutter 앱 배포 로드맵
+
+### 웹앱 실행 방법 (Windows)
+
+```bash
+cd "D:\AI _coding_project_all\seoulmusttry\seoulmusttry_manus"
+pnpm exec cross-env NODE_ENV=development pnpm exec tsx watch server/_core/index.ts
+```
+
+서버 URL: http://localhost:3000/ (또는 사용 가능한 포트)
+
+### Flutter 앱 실행 방법
+
+```powershell
+cd "D:\AI _coding_project_all\seoulmusttry\seoul_in_a_bite_flutter"
+flutter pub get
+flutter run
+```
+
+### 다음 세션에서 진행할 작업
+
+1. **Flutter 앱 테스트** - `flutter pub get` 및 `flutter run` 실행
+2. **Flutter API 연동** - 웹 백엔드 API와 연결
+3. **Supabase 설정** - OAuth, Storage 버킷 생성
+4. **웹앱 나머지 화면 리디자인** - RestaurantDetail, MealBuddy, Profile
+5. **Play Store 배포 준비** - 앱 아이콘, 스플래시 화면
+
+---
+
+## 이전 작업 내역 (2026-02-03)
 
 ### 완료된 작업
 
@@ -166,6 +254,22 @@
 | Phase 1 | Full-stack 기반 (Manus AI) | DONE |
 | Phase 2 | 마이그레이션 + Meal Buddy (Claude Code) | DONE |
 | Phase 3 | 개선 작업 (Claude Code) | DONE |
+| Phase 4 | UI 리디자인 + Flutter 앱 (Claude Code) | IN PROGRESS |
+
+### Phase 4 상세 (2026-02-05 시작)
+
+| # | 작업 | 담당 | 상태 |
+|---|------|------|------|
+| 1 | Google Stitch 디자인 생성 | 사용자 | DONE |
+| 2 | 웹앱 디자인 시스템 (컬러/폰트) | Claude Code | DONE |
+| 3 | 웹앱 환경변수 문제 해결 | Claude Code | DONE |
+| 4 | 웹앱 홈 화면 리디자인 | Claude Code | DONE |
+| 5 | Flutter 프로젝트 생성 | Claude Code | DONE |
+| 6 | Flutter 디자인 시스템 | Claude Code | DONE |
+| 7 | Flutter 주요 화면 개발 | Claude Code | DONE |
+| 8 | Flutter 앱 테스트 및 실행 | 사용자 | TODO |
+| 9 | Flutter API 연동 | Claude Code | TODO |
+| 10 | 웹앱 나머지 화면 리디자인 | Claude Code | TODO |
 
 ### Phase 3 상세
 
