@@ -35,51 +35,71 @@
 
 ---
 
-## 오늘 작업 계획 (2026-02-09)
+## 내일 할 일 (2026-02-26)
 
-### 🎯 세션 목표
-- AI 협업 프로세스 정립 및 CLAUDE.md 자동화 세팅
-- Flutter 앱 테스트 및 실행 확인
-- 오늘 작업 커밋 (사용자 승인 후)
+### 🎯 HIGH - 반드시 할 것
+- [ ] **Flutter API 연동 시작** - dio + Riverpod으로 웹 백엔드 연결
+- [ ] **Flutter 다국어 적용** - intl 패키지로 ko/en/zh-TW/zh-CN 번역
+- [ ] **Flutter 인증 구현** - Supabase Auth 연결 (Google/Kakao OAuth)
+- [ ] **Flutter Git 저장소 초기화** - Flutter 프로젝트 별도 GitHub 관리
 
-### 📋 TODO 리스트
+### 🔶 MEDIUM - 시간 되면
+- [ ] **실제 레스토랑 데이터 투입** - DB에 50개+ 맛집 데이터
+- [ ] **리뷰 사진 업로드** - Supabase Storage 연동
+- [ ] **웹앱 나머지 화면 리디자인** - RestaurantDetail, MealBuddy, Profile
 
-#### HIGH - 오늘 반드시 할 것
-- [x] CLAUDE.md 업데이트 (AI 협업 프로세스 추가)
-- [x] 프로젝트 현황 리뷰
-- [x] Flutter 앱 환경 확인 (`flutter doctor`) - ✅ 대부분 OK
-- [x] Flutter 코드 deprecation 수정 - ✅ 완료 (No issues found!)
-- [x] 사용자 승인 후 커밋
+### 🔷 LOW - 다음 세션으로
+- [ ] **실시간 알림 시스템** - WebSocket/Firebase
+- [ ] **밥친구 그룹 채팅** - 채팅 UI 및 백엔드
+- [ ] **어드민 대시보드** - 관리자 페이지
+- [ ] **Vercel 웹 배포**
+- [ ] **Flutter 빌드 경로 문제 해결** - D:\Program Files 공백 이슈
+- [ ] **Play Store 배포 준비** - 앱 아이콘, 스플래시 화면
 
-#### MEDIUM - 시간 되면
-- [ ] Flutter API 연동 시작 (dio + Riverpod)
-- [ ] 웹앱 나머지 화면 리디자인 계획
+---
 
-#### LOW - 다음 세션으로
-- [ ] Supabase OAuth 설정
-- [ ] Play Store 배포 준비
-- [ ] Flutter 빌드 경로 문제 해결 (D:\Program Files 공백 이슈)
+## 오늘 완료된 작업 (2026-02-25)
 
-### 오늘 완료된 작업 (2026-02-09)
+### 1. 프로젝트 전체 리뷰
+- 웹(manus) + Flutter + 디자인 폴더 전체 탐색 완료
+- 기능 완성도 매트릭스 작성 (웹 vs Flutter 비교표)
+- Phase 3 완료 확인, Phase 4 우선순위 정리
 
-#### Flutter 프로젝트 deprecation 수정
+### 2. Flutter 지도 화면(MapScreen) 구현 - **신규**
+| 파일 | 변경 내용 |
+|------|----------|
+| `(Flutter) lib/features/map/map_screen.dart` | **신규 생성** (817줄) - 전체 지도 화면 |
+| `(Flutter) lib/core/router/app_router.dart` | `/map` 라우트 추가 + MapScreen import |
+| `(Flutter) android/.../AndroidManifest.xml` | Google Maps API 키 플레이스홀더 추가 |
+
+#### MapScreen 구성 요소
+- 전체 화면 Google Maps (서울 중심, 줌 13)
+- 상단 바 (뒤로가기 + "Seoul Eats" + 필터)
+- 검색바 ("Search near Itaewon...")
+- "Search this area" 오렌지 pill 버튼
+- 레스토랑 마커 4개 (오렌지 핀, 탭 시 카드 연동)
+- 줌 컨트롤 (+/-) + 내 위치 버튼
+- 하단 카드 캐러셀 (수평 스크롤, 이미지+이름+별점+배지+거리)
+- API 키 미설정 시 placeholder 지도 표시
+
+### 알려진 이슈
+- Flutter SDK 경로에 공백 ("D:\Program Files\flutter") → 빌드 명령 일부 오류
+- Google Maps API 키 미설정 → AndroidManifest.xml에 실제 키 교체 필요
+
+---
+
+## 이전 완료 작업 (2026-02-09)
+
+### Flutter 프로젝트 deprecation 수정
 | 파일 | 수정 내용 |
 |------|----------|
 | `lib/core/theme/app_theme.dart` | `CardTheme` → `CardThemeData`, `withOpacity` → `withValues(alpha:)` |
-| `lib/features/home/home_screen.dart` | `withOpacity` 9곳 수정, 불필요한 캐스트 제거 |
+| `lib/features/home/home_screen.dart` | `withOpacity` 9곳 수정 |
 | `lib/features/meal_buddy/meal_buddy_screen.dart` | `withOpacity` 5곳 수정 |
-| `lib/features/profile/profile_screen.dart` | `withOpacity` 4곳 수정, 미사용 import 제거 |
+| `lib/features/profile/profile_screen.dart` | `withOpacity` 4곳 수정 |
 | `lib/features/restaurant/restaurant_detail_screen.dart` | `withOpacity` 5곳 수정 |
 | `lib/shared/widgets/main_scaffold.dart` | `withOpacity` 1곳 수정 |
-| `test/widget_test.dart` | `MyApp` → `SeoulInABiteApp` 수정 |
-
-#### 결과
-- `flutter analyze`: ✅ **No issues found!**
-- `flutter build web`: ❌ 경로 공백 문제 (Flutter 경로 "D:\Program Files" 관련)
-
-#### 알려진 이슈
-- Flutter SDK가 "D:\Program Files\flutter"에 설치되어 있어 공백 때문에 일부 빌드 명령에서 오류 발생
-- 해결 방법: Flutter를 공백 없는 경로로 재설치 (예: "D:\flutter")
+- `flutter analyze`: ✅ No issues found!
 
 ---
 
@@ -380,9 +400,12 @@ flutter run
 | 5 | Flutter 프로젝트 생성 | Claude Code | DONE |
 | 6 | Flutter 디자인 시스템 | Claude Code | DONE |
 | 7 | Flutter 주요 화면 개발 | Claude Code | DONE |
-| 8 | Flutter 앱 테스트 및 실행 | 사용자 | TODO |
-| 9 | Flutter API 연동 | Claude Code | TODO |
-| 10 | 웹앱 나머지 화면 리디자인 | Claude Code | TODO |
+| 8 | Flutter 지도 화면(MapScreen) 구현 | Claude Code | DONE (2026-02-25) |
+| 9 | Flutter 앱 테스트 및 실행 | 사용자 | TODO |
+| 10 | Flutter API 연동 | Claude Code | TODO |
+| 11 | Flutter 다국어 적용 | Claude Code | TODO |
+| 12 | Flutter 인증 구현 | Claude Code | TODO |
+| 13 | 웹앱 나머지 화면 리디자인 | Claude Code | TODO |
 
 ### Phase 3 상세
 
